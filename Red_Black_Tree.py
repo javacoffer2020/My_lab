@@ -29,8 +29,4 @@ a = point(1)
 b = point(2)
 c = point(3)
 
-d = red_black_tree()
-d.point = c
-d.lchild = b
-d.rchild = a
-print(d)
+

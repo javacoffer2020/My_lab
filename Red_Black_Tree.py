@@ -1,16 +1,15 @@
 class point:
 
-    def __init__(self, name=0, color=True, box=''):
+    def __init__(self, name=0, color=True):
         self.name = name
         self.color = color
-        self.box = box
 
     def __str__(self):
         if self.color:
             c = 'Red'
         else:
             c = 'Black'
-        return "Name:{}, color:{}, Box:{}".format(self.name, self.color, self.box)
+        return "Name:{}, color:{}\n".format(self.name, c)
 
 
 class red_black_tree:

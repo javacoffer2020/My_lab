@@ -27,6 +27,7 @@ class red_black_tree:
 a = point(1)
 b = point(2)
 c = point(3)
+d = point(4)
 
 print(a, b, c)
 

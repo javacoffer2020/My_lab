@@ -29,5 +29,5 @@ b = point(2)
 c = point(3)
 d = point(4)
 
-print(a, b, c)
+print(a, b, c，d)
 

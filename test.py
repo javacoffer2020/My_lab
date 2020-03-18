@@ -6,3 +6,4 @@ from sklearn.model_selection import train_test_split
 
 profile = pd.read_csv('E:\Jupyter\GitHub\Transactions.csv')
 print(profile.head())
+

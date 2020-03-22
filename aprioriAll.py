@@ -7,7 +7,7 @@ Apriori modified script
 '''
 
 import sys
-sys.path.append('E:/myscripts')
+
 
 import itertools
 import pandas as pd

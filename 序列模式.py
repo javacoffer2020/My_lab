@@ -1,23 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import itertools
 import pandas as pd
-
-
-# In[2]:
 
 
 def createC1(dataSet):  
     C1 = set(itertools.chain(*dataSet))  
     
     return [frozenset([i]) for i in C1]
-
-
-# In[3]:
 
 
 def scanD(dataSet, Ck, min_support):
@@ -33,8 +21,6 @@ def scanD(dataSet, Ck, min_support):
     return {k: v/n for k, v in support.items() if v/n >= min_support}
 
 
-# In[4]:
-
 
 def aprioriGen(Lk):  
     lenLk = len(Lk)
@@ -47,8 +33,6 @@ def aprioriGen(Lk):
                 if len(Lk[i] | Lk[j]) == k +1
             ])  
 
-
-# In[5]:
 
 
 def apriori(dataSet, min_support=0.5): 
@@ -71,18 +55,12 @@ def apriori(dataSet, min_support=0.5):
     return d
 
 
-# In[6]:
-
-
 def rulesGen(iterable):  
     subSet = []
     for i in range(1, len(iterable)):
         subSet.extend(itertools.combinations(iterable, i))
         
     return [(frozenset(lhs), frozenset(iterable.difference(lhs))) for lhs in subSet] 
-
-
-# In[7]:
 
 
 def arules(dataSet, min_support=0.5):
@@ -103,9 +81,6 @@ def arules(dataSet, min_support=0.5):
     return pd.DataFrame(scl)
 
 
-# In[8]:
-
-
 def createLs1(dataSet, min_support):
     n = len(dataSet)
     flattenSet = list(itertools.chain(*dataSet))
@@ -121,9 +96,6 @@ def createLs1(dataSet, min_support):
     return mapping, supportLs1
 
 
-# In[9]:
-
-
 def seqMapping(seq, mapping):
     newSeq = []
     for iSet in seq:
@@ -131,6 +103,7 @@ def seqMapping(seq, mapping):
         if newSet != []:
             newSeq.append(newSet)
     return newSeq
+
 
 def transform(dataSet, mapping):
     transformDS = []
@@ -141,16 +114,14 @@ def transform(dataSet, mapping):
     return transformDS
 
 
-# In[10]:
-
-
 def seqGen(seqA, seqB):
     newA, newB = seqA.copy(), seqB.copy()
     if seqA[:-1] == seqB[:-1]:
         newA.append(seqB[-1])
         newB.append(seqA[-1])
         return [newA, newB]
-    
+
+
 def CsGen(Ls):
     Cs = []
     for seqA, seqB in itertools.combinations(Ls, 2):
@@ -158,9 +129,6 @@ def CsGen(Ls):
         if newSeqs != None:
             Cs.extend(newSeqs)
     return [seq for seq in Cs if seq[1:] in Ls]
-
-
-# In[11]:
 
 
 def isSubSeq(seq,cusSeq):
@@ -178,9 +146,6 @@ def isSubSeq(seq,cusSeq):
             return False
 
 
-# In[12]:
-
-
 def calcSupport (transformDS, Cs, min_support):
     supportLsk = {}; n = len(transformDS)
     if len(Cs) >= 1:
@@ -190,8 +155,6 @@ def calcSupport (transformDS, Cs, min_support):
                 supportLsk.update({tuple(seq):support})
     return [list(k) for k in supportLsk], supportLsk
 
-
-# In[13]:
 
 
 def isSubSeq2(seq, cusSeq):
@@ -210,17 +173,11 @@ def isSubSeq2(seq, cusSeq):
             return False
 
 
-# In[14]:
-
-
 def notProperSubSeq(seq, cusSeq):
     if seq == cusSeq:
         return True
     else:
         return not isSubSeq2(seq, cusSeq)
-
-
-# In[15]:
 
 
 def maxLs(Ls, supportLs):
@@ -237,9 +194,6 @@ def maxLs(Ls, supportLs):
     supportLs = {tuple(seq):supportLs[tuple(seq)] for seq in Ls}
 
     return Ls, supportLs
-
-
-# In[16]:
 
 
 def aprioriAll(dataSet, min_support=0.4):
@@ -267,19 +221,13 @@ def aprioriAll(dataSet, min_support=0.4):
     return pd.DataFrame(list(supportLs.items()), columns=['sequence', 'support'])
 
 
-# In[17]:
-
-
 def aggFunc(*args):
     agg = itertools.chain(*args)
     return list(agg)
 
 
-# In[18]:
-
-
 Transactions = pd.read_csv('Transactions.csv')
 baskets = Transactions['Model'].groupby([Transactions['OrderNumber'], Transactions['LineNumber']]).apply(aggFunc)
 dataSet = list(baskets.groupby(level=0).apply(list))
-aprioriAll(dataSet, min_support=0.05).head()
+print(aprioriAll(dataSet, min_support=0.05).head())
 

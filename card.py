@@ -1,24 +1,26 @@
-from math import hypot
+import bisect
+import sys
 
-class Vector:
+HAYSTACK = [1, 4, 5, 6, 8, 12, 15, 20, 21, 23, 23, 26, 29, 30]
+NEEDLES = [0, 1, 2, 5, 8, 10, 22, 23, 29, 30, 31]
 
-    def __init__(self):
-        self.x = x
-        self.y = y
+ROW_FMT = '{0:2d} @ {1:2d}   {2}{0:<2d}'
 
-    def __repr__(self):
-        return 'Vector(%r, %r)' % (self.x, self.y)
 
-    def __abs__(self):
-        return hypot(self.x, self.y)
+def demo(bisect_fn):
+    for needle in reversed(NEEDLES):
+        position = bisect_fn(HAYSTACK, needle)
+        offset = position * '  |'
+        print(ROW_FMT.format(needle, position, offset))
 
-    def __bool__(self):
-        return bool(abs(self))
 
-    def __add__(self, other):
-        x = self.x + other.x
-        y = self.y + other.y
-        return Vector(x, y)
+if __name__ == '__main__':
 
-    def __mul__(self, scalar):
-        return Vector(self.x * scalar, self.y * scalar)
+    if sys.argv[-1] == 'left':
+        bisect_fn = bisect.bisect_left
+    else:
+        bisect_fn = bisect.bisect
+
+    print('DEMO:', bisect_fn.__name__)
+    print('haystack ->', ' '.join('%2d' % n for n in HAYSTACK))
+    demo(bisect_fn)

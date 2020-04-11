@@ -6,12 +6,9 @@ Apriori modified script
 @author: ZRQ
 '''
 
-import sys
-
-
 import itertools
 import pandas as pd
-from apriori import apriori
+from 第15章.apriori import apriori
 
 
 def createLs1(dataSet, min_support):# 'Ls' for Large Sequence

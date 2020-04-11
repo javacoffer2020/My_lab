@@ -5,7 +5,7 @@
 
 
 import pandas as pd
-import apriori
+from 第15章 import apriori
 
 Transactions = pd.read_csv('Transactions.csv')
 Transactions.head()

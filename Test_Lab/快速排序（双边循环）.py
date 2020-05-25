@@ -15,6 +15,7 @@ def quick_sort(start_index, end_index, array=[]):
 
 
 def partition_v1(start_index, end_index, array=[]):
+    # 双向排序
     # 取第一个位置的元素作为基准元素（也可以选择随机位置）
     pivot = array[start_index]
     left = start_index
@@ -35,6 +36,8 @@ def partition_v1(start_index, end_index, array=[]):
     array[start_index] = array[left]
     array[left] = pivot
     return left
+
+
 
 
 my_array = list([3, 4, 14, 1, 5, 6, 7, 8, 1, -1, 0, 9, 11])

@@ -5,12 +5,12 @@
 """
 
 import xlrd
-book = xlrd.open_workbook("SOWC 2014 Stat Tables_Table 9.xlsx")
+book = xlrd.open_workbook("../../data/chp4/SOWC 2014 Stat Tables_Table 9.xlsx")
 
 sheet = book.sheet_by_name("Table 9 ")
 
 data = {}
-for i in xrange(14, sheet.nrows):
+for i in range(14, sheet.nrows):
 
     # Start at 14th row, because that is where the countries begin
     row = sheet.row_values(i)

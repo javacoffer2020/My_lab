@@ -1,6 +1,6 @@
 from csv import DictReader
 
-mn_data_rdr = DictReader(open('../../data/unicef/mn.csv', 'rb'))
+mn_data_rdr = DictReader(open('../../data/unicef/mn.csv', 'r'))
 mn_data = [d for d in mn_data_rdr]
 
 
@@ -16,4 +16,4 @@ def combine_data_dict(data_rows):
 
 mn_dict = combine_data_dict(mn_data)
 
-print len(mn_dict)
+print(len(mn_dict))

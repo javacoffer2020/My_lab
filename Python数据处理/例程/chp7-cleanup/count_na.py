@@ -11,4 +11,4 @@ for row in zipped_data:
             else:
                 na_count[question] = 1
 
-print na_count
+print(na_count)

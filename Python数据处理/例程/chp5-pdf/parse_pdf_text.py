@@ -1,4 +1,4 @@
-pdf_txt = 'en-final-table9.txt'
+pdf_txt = '../../data/chp5/EN-FINAL Table 9.txt'
 openfile = open(pdf_txt, 'r')
 country_line = total_line = False
 previous_line = ''

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="data_wrangling" uuid="1c320b05-5cd6-4c0e-9031-3e2feabf8939">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:E:\Python\Projects\My_lab\Python数据处理\例程\chp6-db\data_wrangling.db</jdbc-url>
+    </data-source>
+  </component>
+</project>

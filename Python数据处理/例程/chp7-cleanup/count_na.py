@@ -11,4 +11,5 @@ for row in zipped_data:
             else:
                 na_count[question] = 1
 
-print(na_count)
+for key in na_count.keys():
+     print("{}:{}".format(key, na_count[key]))

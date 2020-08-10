@@ -17,3 +17,4 @@ def combine_data_dict(data_rows):
 mn_dict = combine_data_dict(mn_data)
 
 print(len(mn_dict))
+print(mn_dict)

@@ -23,7 +23,7 @@ for header in data_rows[0]:
                 break
 
 del all_short_headers
-
+print(skip_index)
 new_data = []
 
 for row in data_rows[1:]:
@@ -31,7 +31,7 @@ for row in data_rows[1:]:
     for i, d in enumerate(row):
         if i not in skip_index:
             new_row.append(d)
-        new_data.append(new_row)
+    new_data.append(new_row)
 
 
 zipped_data = []
@@ -40,3 +40,7 @@ for drow in new_data:
     zipped_data.append(zip(header_rows, drow))
 
 print(list(zipped_data[0]))
+print(list(zipped_data[1]))
+print(list(zipped_data[2]))
+print(list(zipped_data[3]))
+print(list(zipped_data[4]))

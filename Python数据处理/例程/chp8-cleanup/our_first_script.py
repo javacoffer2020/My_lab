@@ -1,8 +1,9 @@
 from csv import reader
 import dataset
+import numpy as np
 
-data_rdr = reader(open('../../../data/unicef/mn.csv', 'rb'))
-header_rdr = reader(open('../../../data/unicef/mn_headers_updated.csv', 'rb'))
+data_rdr = reader(open('../../data/unicef/mn.csv', 'r'))
+header_rdr = reader(open('../../data/unicef/mn_headers_updated.csv', 'r', encoding='UTF-8'))
 
 data_rows = [d for d in data_rdr]
 header_rows = [h for h in header_rdr if h[0] in data_rows[0]]
@@ -14,7 +15,7 @@ final_header_rows = []
 
 for header in data_rows[0]:
     if header not in all_short_headers:
-        print header
+        print(header)
         index = data_rows[0].index(header)
         if index not in skip_index:
             skip_index.append(index)
@@ -42,18 +43,30 @@ for drow in new_data:
 
 for x in zipped_data[0]:
     if not x[1]:
-        print x
+        print(x)
 
 # look for dupes
 
-set_of_keys = set([
-    '%s-%s-%s' % (x[0][1], x[1][1], x[2][1]) for x in zipped_data])
 
-uniques = [x for x in zipped_data if not
-           set_of_keys.remove('%s-%s-%s' %
-                              (x[0][1], x[1][1], x[2][1]))]
 
-print len(set_of_keys)
+# set_of_keys = set([
+#     '%s-%s-%s' % (x[0][1], x[1][1], x[2][1]) for x in zipped_data])
+#
+# uniques = [x for x in zipped_data if not
+#            set_of_keys.remove('%s-%s-%s' %
+#                               (x[0][1], x[1][1], x[2][1]))]
+
+for x in zipped_data:
+    list_x = list(x)
+    print(list_x)
+    # set_of_keys = set(['%s-%s-%s' % (list_x[0][1], list_x[1][1], list_x[2][1])])
+
+for x in zipped_data:
+    if not(x in zipped_data):
+        list_x = list(x)
+        set_of_keys.remove('%s-%s-%s' % (list_x[0][1], list_x[1][1], list_x[2][1]))
+
+print(len(set_of_keys))
 
 # saving to db
 

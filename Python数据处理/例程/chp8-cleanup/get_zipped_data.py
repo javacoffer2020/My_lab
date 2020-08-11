@@ -19,8 +19,8 @@ def get_headers(data_rows, header_rows):
 
 
 def get_clean_rows():
-    data_rdr = reader(open('../../data/unicef/mn.csv', 'rb'))
-    header_rdr = reader(open('../../data/unicef/mn_headers_updated.csv', 'rb'))
+    data_rdr = reader(open('../../data/unicef/mn.csv', 'r'))
+    header_rdr = reader(open('../../data/unicef/mn_headers_updated.csv', 'r', encoding='UTF-8'))
 
     data_rows = [d for d in data_rdr]
     header_rows = [h for h in header_rdr if h[0] in data_rows[0]]

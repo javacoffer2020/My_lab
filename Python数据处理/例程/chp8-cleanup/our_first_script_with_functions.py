@@ -3,7 +3,7 @@ import dataset
 
 
 def get_rows(file_name):
-    rdr = reader(open(file_name, 'rb'))
+    rdr = reader(open(file_name, 'r', encoding='UTF-8'))
     return [row for row in rdr]
 
 
@@ -85,8 +85,8 @@ def save_to_sqlitedb(db_file, zipped_data, survey_type):
 
 
 def main():
-    data_rows = get_rows('data/unicef/mn.csv')
-    header_rows = get_rows('data/unicef/mn_headers_updated.csv')
+    data_rows = get_rows('../../data/unicef/mn.csv')
+    header_rows = get_rows('../../data/unicef/mn_headers_updated.csv')
     skip_index, final_header_rows = eliminate_mismatches(header_rows,
                                                          data_rows)
     zipped_data = create_zipped_data(final_header_rows, data_rows, skip_index)
@@ -101,7 +101,7 @@ def main():
         if num_dupes:
             error_msg += 'We have {} duplicates. '.format(num_dupes)
         error_msg += 'Please have a look and fix!'
-        print error_msg
+        print(error_msg)
 
 
 if __name__ == '__main__':

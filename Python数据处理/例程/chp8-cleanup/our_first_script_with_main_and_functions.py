@@ -9,7 +9,7 @@ def main():
     num_missing = find_missing_data(zipped_data)
     uniques, num_dupes = find_duplicate_data(zipped_data)
     if num_missing == 0 and num_dupes == 0:
-        save_to_sqlitedb('sqlite:///data/data_wrangling.db', zipped_data)
+        save_to_sqlitedb('sqlite:///data_wrangling.db', zipped_data)
     else:
         error_msg = ''
         if num_missing:

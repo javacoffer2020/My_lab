@@ -5,12 +5,19 @@ c = ['甲', '乙','丙','丁','已']
 zipped_data = []
 for i in range(0,5,1):
     data = zip(a[i], b[i], c[i])
-    print(list(data))
     zipped_data.append(data)
 
-unzipped_data = list(zipped_data)
+# unzipped_data = []
+# for data in zipped_data:
+#     unzip = data
+#     unzipped_data.append(unzip)
 
-set_of_keys = set([
-     '%s-%s-%s' % (x[0], x[1], x[2]) for x in unzipped_data])
+print(zipped_data)
+data1 = list(zipped_data[0])
 
-print(set_of_keys)
+print((data1[0])[2])
+print((list(zipped_data[0])[0])[2])
+# set_of_keys = set([
+#      '%s-%s-%s' % ((list(x)[0])[0], (list(x)[0])[1], (list(x)[0])[2]) for x in zipped_data])
+#
+# print(set_of_keys)

@@ -56,18 +56,18 @@ for x in zipped_data[0]:
 #                               (list(x)[0][1], list(x)[1][1], list(x)[2][1]))]
 
 
-set_of_keys = list()
-for x in zipped_data[1:]:
-    list_x = list(x)
-    set_of_keys.append('%s-%s-%s' % (list_x[0][1], list_x[1][1], list_x[2][1]))
-set_of_keys = set(set_of_keys)
-
-for x in zipped_data[1:]:
-    if not(x in zipped_data):
-        list_x = list(x)
-        set_of_keys.remove('%s-%s-%s' % (list_x[0][1], list_x[1][1], list_x[2][1]))
-
-print(len(set_of_keys))
+# set_of_keys = list()
+# for x in zipped_data[1:]:
+#     list_x = list(x)
+#     set_of_keys.append('%s-%s-%s' % (list_x[0][1], list_x[1][1], list_x[2][1]))
+# set_of_keys = set(set_of_keys)
+#
+# for x in zipped_data[1:]:
+#     if not(x in zipped_data):
+#         list_x = list(x)
+#         set_of_keys.remove('%s-%s-%s' % (list_x[0][1], list_x[1][1], list_x[2][1]))
+#
+# print(len(set_of_keys))
 
 # saving to db
 
@@ -75,9 +75,10 @@ db = dataset.connect('sqlite:///data_wrangling.db')
 
 table = db['unicef_survey']
 
-for row_num, data in enumerate(zipped_data):
-    print(list(data))
-    for question, answer in enumerate(data):
+for row_num, data in enumerate(zipped_data[1:]):
+    datas = list(data)
+    print(row_num)
+    for question, answer in datas:
         data_dict = {
             'question': question[1],
             'question_code': question[0],
@@ -85,5 +86,4 @@ for row_num, data in enumerate(zipped_data):
             'response_number': row_num,
             'survey': 'mn',
         }
-
-    # table.insert(data_dict)
+        table.insert(data_dict)

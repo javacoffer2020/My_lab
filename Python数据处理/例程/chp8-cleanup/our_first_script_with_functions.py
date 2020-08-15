@@ -46,22 +46,35 @@ def create_zipped_data(final_header_rows, data_rows, skip_index):
 
 def find_missing_data(zipped_data):
     missing_count = 0
-    for question, answer in zipped_data:
-        if not answer:
-            missing_count += 1
+    # for question, answer in zipped_data:
+    for data in zipped_data:
+        for question, answer in data:
+            if not answer:
+                missing_count += 1
+                break
     return missing_count
 
 
 def find_duplicate_data(zipped_data):
-    set_of_keys = set([
-        '%s-%s-%s' % (row[0][1], row[1][1], row[2][1])
-        for row in zipped_data])
+    # set_of_keys = set([
+    #     '%s-%s-%s' % (row[0][1], row[1][1], row[2][1])
+    #     for row in zipped_data])
+    #
+    # uniques = [row for row in zipped_data if not
+    #            set_of_keys.remove('%s-%s-%s' %
+    #                               (row[0][1], row[1][1], row[2][1]))]
 
-    uniques = [row for row in zipped_data if not
-               set_of_keys.remove('%s-%s-%s' %
-                                  (row[0][1], row[1][1], row[2][1]))]
+    unzipped_data = []
+    for data in zipped_data[1:]:
+        label = []
+        for qustiong, answer in data:
+            label.append(answer)
+        unzipped_data.append('%s-%s-%s' % (label[0],label[1],label[2]))
 
-    return uniques, len(set_of_keys)
+    set_of_keys = set(unzipped_data)
+
+
+    # return uniques, len(set_of_keys)
 
 
 def save_to_sqlitedb(db_file, zipped_data, survey_type):

@@ -7,11 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:E:\PyProjects\My_lab\Python数据处理\例程\chp6-db\data_wrangling.db</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="data_wrangling [2]" uuid="795dbb41-a78b-40c5-ab87-364f3e65803a">
+    <data-source source="LOCAL" name="data_wrangling [2]" uuid="b06b352b-2191-4044-a41f-785fc4688d5e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\Python\Projects\My_lab\Python数据处理\例程\chp8-cleanup\data_wrangling.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:E:\PyProjects\My_lab\Python数据处理\例程\chp8-cleanup\data_wrangling.db</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.31.1/sqlite-jdbc-3.31.1.jar</url>

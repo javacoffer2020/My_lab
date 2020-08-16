@@ -1,5 +1,6 @@
 from csv import reader
 import dataset
+import numpy as np
 
 
 def get_rows(file_name):
@@ -28,7 +29,9 @@ def eliminate_mismatches(header_rows, data_rows):
 def zip_data(headers, data):
     zipped_data = []
     for drow in data:
-        zipped_data.append(zip(headers, drow))
+        z = list(zip(headers, drow))
+        zipped_data.append(z)
+        # zipped_data.append(zip(headers, drow))
     return zipped_data
 
 
@@ -56,28 +59,17 @@ def find_missing_data(zipped_data):
 
 
 def find_duplicate_data(zipped_data):
-    # set_of_keys = set([
-    #     '%s-%s-%s' % (row[0][1], row[1][1], row[2][1])
-    #     for row in zipped_data])
-    #
-    # uniques = [row for row in zipped_data if not
-    #            set_of_keys.remove('%s-%s-%s' %
-    #                               (row[0][1], row[1][1], row[2][1]))]
+    set_of_keys = set([
+        '%s-%s-%s' % (row[0][1], row[1][1], row[2][1])
+        for row in zipped_data])
 
-    unzipped_data = []
-    for data in zipped_data[1:]:
-        label = []
-        for qustiong, answer in data:
-            label.append(answer)
-        unzipped_data.append('%s-%s-%s' % (label[0],label[1],label[2]))
-
-    set_of_keys = set(unzipped_data)
+    uniques = [row for row in zipped_data if not
+               set_of_keys.remove('%s-%s-%s' %
+                                  (row[0][1], row[1][1], row[2][1]))]
+    return uniques, len(set_of_keys)
 
 
-    # return uniques, len(set_of_keys)
-
-
-def save_to_sqlitedb(db_file, zipped_data, survey_type):
+def save_to_sqlitedb(db_file, zipped_data, survey_type=0):
     db = dataset.connect(db_file)
 
     table = db['unicef_survey']
@@ -106,7 +98,7 @@ def main():
     num_missing = find_missing_data(zipped_data)
     uniques, num_dupes = find_duplicate_data(zipped_data)
     if num_missing == 0 and num_dupes == 0:
-        save_to_sqlitedb('sqlite:///data/data_wrangling.db', zipped_data)
+        save_to_sqlitedb('sqlite:///data_wrangling.db', zipped_data)
     else:
         error_msg = ''
         if num_missing:

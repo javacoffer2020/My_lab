@@ -4,8 +4,8 @@ of our data exploration.
 """
 
 import agate
-import xlrd
-from xlrd.sheet import ctype_text
+import openpyxl
+# from xlrd.sheet import ctype_text
 
 text_type = agate.Text()
 number_type = agate.Number()
@@ -23,7 +23,7 @@ def get_types(example_row):
     """ Classify with agate types using an XLS example row. """
     types = []
     for v in example_row:
-        value_type = ctype_text[v.ctype]
+        value_type = str(v.ctype)
         if value_type == 'text':
             types.append(text_type)
         elif value_type == 'number':
@@ -42,13 +42,13 @@ def get_table(new_arr, types, titles):
         table = agate.Table(new_arr, titles, types)
         return table
     except Exception as e:
-        print e
+        print(e)
 
 
 def unicef_data():
     """ Return a ranked agate table of unicef data with proper cleaned rows."""
-    workbook = xlrd.open_workbook('unicef_oct_2014.xlsx')
-    sheet = workbook.sheets()[0]
+    workbook = openpyxl.open('../../data/unicef/unicef_oct_2014.xlsx')
+    sheet = workbook.active
 
     title_rows = zip(sheet.row_values(4), sheet.row_values(5))
     titles = [t[0] + ' ' + t[1] for t in title_rows]
@@ -75,9 +75,9 @@ def cpi_data():
     """ Return an agate table of CPI data with proper rows."""
 
 
-    cpi_workbook = xlrd.open_workbook(
-        'corruption_perception_index.xlsx')
-    cpi_sheet = cpi_workbook.sheets()[0]
+    cpi_workbook = openpyxl.open(
+        '../../data/chp9/corruption_perception_index.xlsx')
+    cpi_sheet = cpi_workbook.active
 
 
     cpi_title_rows = zip(cpi_sheet.row_values(1), cpi_sheet.row_values(2))

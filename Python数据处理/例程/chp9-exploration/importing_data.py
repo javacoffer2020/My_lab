@@ -8,30 +8,35 @@ you can use it in the repository. Obviously, if you'd like to reuse bits of this
 code, it should be rewritten as a proper script :) -- @kjam
 """
 
-import xlrd
+import openpyxl
 import agate
 
+# 打开EXCEL文件
+workbook = openpyxl.load_workbook('../../data/unicef/unicef_oct_2014.xlsx')
+print(workbook.sheetnames)
 
-workbook = xlrd.open_workbook('../../data/unicef/unicef_oct_2014.xls')
-workbook.nsheets
-workbook.sheet_names()
+# 设定活动表格，获取行数和列数
+sheet = workbook.active
+row = sheet.max_row
+column = sheet.max_column
 
-sheet = workbook.sheets()[0]
-sheet.nrows
-sheet.row_values(0)
-
-for r in range(sheet.nrows):
-    print r, sheet.row(r)
-
-title_rows = zip(sheet.row_values(4), sheet.row_values(5))
-title_rows
+# 获得第5、6行的数据，并zip获得表头
+rowdata5 = []
+rowdata6 = []
+for i in range(1, column+1):
+    cellvalue = sheet.cell(row=5,column=i).value
+    rowdata5.append(cellvalue)
+    cellvalue = sheet.cell(row=6,column=i).value
+    rowdata6.append(cellvalue)
+title_rows = zip(rowdata5, rowdata6)
+title_rows = list(title_rows)
 
 titles = [t[0] + ' ' + t[1] for t in title_rows]
 titles = [t.strip() for t in titles]
 titles
 
-country_rows = [sheet.row_values(r) for r in range(6, 114)]
-country_rows
+country_rows = [sheet.cell(row=r, column=1).value for r in range(7, 114)]
+print(country_rows)
 
 from xlrd.sheet import ctype_text
 import agate
@@ -42,10 +47,10 @@ boolean_type = agate.Boolean()
 date_type = agate.Date()
 
 example_row = sheet.row(6)
-print example_row
-print example_row[0].ctype
-print example_row[0].value
-print ctype_text
+print(example_row)
+print(example_row[0].ctype)
+print(example_row[0].value)
+print(ctype_text)
 
 
 types = []
